@@ -1,0 +1,3 @@
+<% layout('./layout', it) %>
+<h1><%= it.title %></h1>
+<p>It works.</p>

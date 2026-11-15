@@ -1,0 +1,22 @@
+{
+  "name": "white-generator",
+  "version": "0.1.0",
+  "description": "Web application based on White.js framework",
+  "license": "ISC",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kai-studios/white-generator.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "start": "white run",
+    "dev": "white run dev"
+  },
+  "dependencies": {
+    "white-js": "^0.1.0"
+  }
+}
