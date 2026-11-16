@@ -1,0 +1,6 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <span>© <%= it.site.year %> <%= it.site.name %></span>
+    <span>Built with White.js · <a href="/api/status">API status</a></span>
+  </div>
+</footer>

@@ -1,3 +1,11 @@
-<% layout('./layout', { title: it.status }) %>
-<h1><%= it.status %></h1>
-<p><%= it.message %></p>
+<%
+  const headings = { 403: 'Not allowed', 404: 'Page not found', 429: 'Too many requests' };
+  const heading = headings[it.status] || (it.status >= 500 ? 'Something went wrong' : 'Request failed');
+  layout('./layout', { ...it, title: String(it.status) });
+%>
+<section class="error-page">
+  <p class="error-code"><%= it.status %></p>
+  <h1><%= heading %></h1>
+  <p class="lead"><%= it.message %></p>
+  <p class="actions"><a class="button button--primary" href="/">Back to the home page</a></p>
+</section>

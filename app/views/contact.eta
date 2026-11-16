@@ -1,0 +1,20 @@
+<% layout('./layout', it) %>
+<section class="page-head">
+  <h1>Contact</h1>
+  <p class="lead">A demo form. The server validates it with zod; nothing is stored or sent.</p>
+</section>
+
+<% if (it.sent) { %>
+<div class="notice notice--ok" role="status">Thanks! Your message was accepted.</div>
+<% } %>
+
+<form class="form" method="post" action="/contact" novalidate>
+  <%~ include('./partials/field', { name: 'name', label: 'Name', value: it.values.name, errors: it.errors, max: it.limits.name, autocomplete: 'name' }) %>
+  <%~ include('./partials/field', { name: 'email', label: 'Email', type: 'email', value: it.values.email, errors: it.errors, autocomplete: 'email' }) %>
+  <%~ include('./partials/field', { name: 'message', label: 'Message', value: it.values.message, errors: it.errors, max: it.limits.message, multiline: true }) %>
+  <p><button class="button button--primary" type="submit">Send message</button></p>
+</form>
+
+<%/* Inline scripts need the per-request nonce. it.w.json() makes data safe to embed. */%>
+<script nonce="<%= it.nonce %>">window.__LIMITS__ = <%~ it.w.json(it.limits) %>;</script>
+<script src="<%= it.w.asset('/js/contact.js') %>" defer></script>

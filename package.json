@@ -1,7 +1,7 @@
 {
   "name": "white-generator",
-  "version": "0.1.0",
-  "description": "Web application based on White.js framework",
+  "version": "0.2.0",
+  "description": "A starter site built with White.js",
   "license": "ISC",
   "private": true,
   "repository": {
@@ -17,6 +17,7 @@
     "dev": "white run dev"
   },
   "dependencies": {
-    "white-js": "^0.1.0"
+    "white-js": "^0.1.2",
+    "zod": "^4.0.0"
   }
 }

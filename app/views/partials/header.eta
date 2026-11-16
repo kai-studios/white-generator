@@ -1,0 +1,16 @@
+<% const links = [['/', 'Home'], ['/blog', 'Blog'], ['/contact', 'Contact']];
+   const current = it.path || ''; %>
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/">
+      <img src="<%= it.w.asset('/favicon.svg') %>" width="28" height="28" alt="">
+      <span><%= it.site.name %></span>
+    </a>
+    <nav aria-label="Main">
+      <% for (const [href, label] of links) {
+           const active = href === '/' ? current === '/' : current.startsWith(href); %>
+      <a href="<%= href %>"<% if (active) { %> aria-current="page"<% } %>><%= label %></a>
+      <% } %>
+    </nav>
+  </div>
+</header>

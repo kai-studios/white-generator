@@ -1,16 +1,5 @@
-// Project settings. The framework core reads only this file.
+// Only what differs from the White.js defaults is listed here.
+// Defaults: routes in server/routes, views in app/views, static files in app/public.
 export default {
-  port: Number(process.env.PORT) || 3000,
-
-  dirs: {
-    routes: 'server/routes',
-    views: 'app/views',
-    public: 'app/public',
-    meta: 'server/meta',
-  },
-
-  view: { engine: 'eta' },
-
-  // Strings (npm packages or paths like './server/plugins/x.js') or functions
-  plugins: [],
+  plugins: ['./server/plugins/site.js'],
 };

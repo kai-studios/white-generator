@@ -1,0 +1,16 @@
+<% layout('../layout', it) %>
+<section class="page-head">
+  <h1>Blog</h1>
+  <p class="lead">Short notes on how White.js works.</p>
+</section>
+<ul class="post-list">
+  <% for (const post of it.posts) { %>
+  <li>
+    <a href="/blog/<%= post.slug %>">
+      <span class="meta"><%= post.dateLabel %></span>
+      <h2><%= post.title %></h2>
+      <p><%= post.summary %></p>
+    </a>
+  </li>
+  <% } %>
+</ul>

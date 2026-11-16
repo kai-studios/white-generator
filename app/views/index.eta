@@ -1,3 +1,47 @@
 <% layout('./layout', it) %>
-<h1><%= it.title %></h1>
-<p>It works.</p>
+<section class="hero">
+  <h1>A thin, fast framework<br>on top of Express</h1>
+  <p class="lead">File-based routes, secure defaults, validation and plugins. Plain JavaScript, no build step.</p>
+  <p class="actions">
+    <a class="button button--primary" href="/blog/getting-started">Get started</a>
+    <a class="button" href="/contact">Try the contact form</a>
+  </p>
+</section>
+
+<section>
+  <h2 class="section-title">What you get</h2>
+  <div class="grid">
+    <article class="card">
+      <h3>Routes from files</h3>
+      <p>Put a file in <code>server/routes</code> and it becomes a URL. <code>[slug].js</code> becomes <code>:slug</code>.</p>
+    </article>
+    <article class="card">
+      <h3>Secure by default</h3>
+      <p>Security headers, a CSP with a nonce per request, CSRF origin checks, rate limits and body limits.</p>
+    </article>
+    <article class="card">
+      <h3>Validation</h3>
+      <p>Check params, query and body with zod. Mistakes turn into clean 422 responses.</p>
+    </article>
+    <article class="card">
+      <h3>Clear errors</h3>
+      <p>Throw <code>NotFoundError</code> anywhere. Visitors get an error page, API clients get JSON.</p>
+    </article>
+    <article class="card">
+      <h3>Plugins</h3>
+      <p>Add features with <code>white plugin add</code>. A local plugin is just a function.</p>
+    </article>
+    <article class="card">
+      <h3>Almost no config</h3>
+      <p>Sensible defaults. <code>white.config.js</code> lists only what you change.</p>
+    </article>
+  </div>
+</section>
+
+<section>
+  <h2 class="section-title">A route in four lines</h2>
+<pre><code>// server/routes/client/hello.js  →  GET /hello
+export default (router) =&gt; {
+  router.get('/', (req, res) =&gt; res.render('hello', { name: 'World' }));
+};</code></pre>
+</section>

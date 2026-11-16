@@ -1,0 +1,13 @@
+<% layout('../layout', it) %>
+<article class="prose">
+  <p><a href="/blog">← All posts</a></p>
+  <h1><%= it.post.title %></h1>
+  <p class="meta"><%= it.dateLabel %></p>
+  <% for (const block of it.post.body) { %>
+    <% if (block.code) { %>
+  <pre><code><%= block.code %></code></pre>
+    <% } else { %>
+  <p><%= block.text %></p>
+    <% } %>
+  <% } %>
+</article>
