@@ -1,13 +1,14 @@
 <% layout('../layout', it) %>
+<div class="progress" aria-hidden="true"></div>
 <article class="prose">
-  <p><a href="/blog">← All posts</a></p>
-  <h1><%= it.post.title %></h1>
-  <p class="meta"><%= it.dateLabel %></p>
-  <% for (const block of it.post.body) { %>
+  <a class="back" href="/blog" data-rise><span aria-hidden="true">←</span> All posts</a>
+  <h1 data-rise style="--i:1"><%= it.post.title %></h1>
+  <p class="meta" data-rise style="--i:2"><%= it.dateLabel %></p>
+  <% it.post.body.forEach((block, i) => { %>
     <% if (block.code) { %>
-  <pre><code><%= block.code %></code></pre>
+  <%~ include('../partials/code', { code: block.code }) %>
     <% } else { %>
-  <p><%= block.text %></p>
+  <p data-rise style="--i:<%= Math.min(i + 3, 8) %>"><%= block.text %></p>
     <% } %>
-  <% } %>
+  <% }) %>
 </article>

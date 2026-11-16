@@ -1,0 +1,7 @@
+<%
+  // Title block at the top of a page. Parameters: title, lead.
+%>
+<section class="page-head">
+  <h1 data-rise><%= it.title %></h1>
+  <p class="lead" data-rise style="--i:1"><%= it.lead %></p>
+</section>

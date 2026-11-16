@@ -1,0 +1,11 @@
+<%
+  // Button or link styled as a button.
+  // Parameters: label, href (a link when given, otherwise a <button>), variant ('primary' | 'ghost'),
+  //             arrow (adds a sliding arrow), type, size ('sm'), class (extra class names).
+  const cls = 'button button--' + (it.variant || 'primary') + (it.size ? ' button--' + it.size : '') + (it.class ? ' ' + it.class : '');
+%>
+<% if (it.href) { %>
+<a class="<%= cls %>" href="<%= it.href %>"><span class="button__label"><%= it.label %></span><% if (it.arrow) { %><span class="button__arrow" aria-hidden="true">→</span><% } %></a>
+<% } else { %>
+<button class="<%= cls %>" type="<%= it.type || 'button' %>"><span class="button__label"><%= it.label %></span><span class="button__spinner" aria-hidden="true"></span></button>
+<% } %>

@@ -4,8 +4,8 @@
   layout('./layout', { ...it, title: String(it.status) });
 %>
 <section class="error-page">
-  <p class="error-code"><%= it.status %></p>
-  <h1><%= heading %></h1>
-  <p class="lead"><%= it.message %></p>
-  <p class="actions"><a class="button button--primary" href="/">Back to the home page</a></p>
+  <p class="error-code" data-rise><%= it.status %></p>
+  <h1 data-rise style="--i:1"><%= heading %></h1>
+  <p class="lead" data-rise style="--i:2"><%= it.message %></p>
+  <p class="actions" data-rise style="--i:3"><%~ include('./partials/button', { href: '/', label: 'Back to the home page', arrow: true }) %></p>
 </section>

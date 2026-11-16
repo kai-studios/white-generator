@@ -30,9 +30,23 @@ server/
   schemas/message.js         zod schema shared by the form and the API
   data/posts.js              sample blog content
 app/
-  views/                     Eta templates (layout, partials, pages, error page)
-  public/                    static files: css, js, favicon, robots.txt
+  views/                     Eta templates (layout, pages, error page)
+    partials/                components: button, field, code, terminal, icon, header, footer
+  public/
+    css/                     base.css (tokens, text), components.css, pages.css
+    js/                      ui.js (all pages), contact.js (the form)
+    favicon.svg, robots.txt
 ```
+
+## Design
+
+The site is white on purpose: one light theme, hairlines instead of boxes, soft shadows and a single gradient used in thin touches. There is no build step and no CSS or JS framework.
+
+- **Tokens first.** Colors, radii, shadows and easing curves are CSS variables at the top of `base.css`. Change them there.
+- **Motion is CSS.** Entrance animations (`data-rise`), the typed terminal, page cross-fades (View Transitions) and the reading progress line need no JavaScript. `ui.js` adds scroll reveal, the sliding nav pill, the card spotlight, copy buttons and link prefetching on hover.
+- **Works without JavaScript.** Content is never hidden unless a script is there to reveal it, and the contact form posts normally and shows server-side errors.
+- **Respects `prefers-reduced-motion`.**
+- **Components are partials.** `include('./partials/button', { href: '/', label: 'Home', arrow: true })`. Each partial lists its parameters in a comment at the top.
 
 ## Features to look at
 
@@ -44,7 +58,8 @@ app/
 | Validation in a route (`validate`) | `server/routes/api/messages.js` |
 | Validation in an HTML form with redirect after POST | `server/routes/client/contact.js` |
 | `NotFoundError` and the error page | `blog/[slug].js`, `app/views/error.eta` |
-| Layout, partials, reusable form field | `app/views/layout.eta`, `app/views/partials/` |
+| Layout, component partials (button, field, code, icon) | `app/views/layout.eta`, `app/views/partials/` |
+| Form that works with and without JavaScript | `app/views/contact.eta`, `app/public/js/contact.js` |
 | CSP nonce and `it.w.json()` | `app/views/contact.eta` |
 | Cache-busting asset URLs (`it.w.asset()`) | `app/views/layout.eta` |
 

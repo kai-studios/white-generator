@@ -1,15 +1,18 @@
 <%
-  // One form field with its label and error message.
-  // Parameters: name, label, value, errors, max, and optionally type, autocomplete, multiline.
+  // One form field with its label, error message and, for textareas, a character meter.
+  // Parameters: name, label, value, errors, max, and optionally type, autocomplete, multiline, placeholder.
   const error = it.errors[it.name];
 %>
 <div class="field<%= error ? ' has-error' : '' %>">
   <label for="<%= it.name %>"><%= it.label %></label>
   <% if (it.multiline) { %>
-  <textarea id="<%= it.name %>" name="<%= it.name %>" rows="6" maxlength="<%= it.max %>" required<% if (error) { %> aria-invalid="true" aria-describedby="<%= it.name %>-error"<% } %>><%= it.value %></textarea>
-  <span class="counter" id="<%= it.name %>-counter" aria-hidden="true"></span>
+  <textarea id="<%= it.name %>" name="<%= it.name %>" rows="6" maxlength="<%= it.max %>" placeholder="<%= it.placeholder || '' %>" required<% if (error) { %> aria-invalid="true" aria-describedby="<%= it.name %>-error"<% } %>><%= it.value %></textarea>
+  <div class="field__foot" aria-hidden="true">
+    <div class="meter" id="<%= it.name %>-meter"><i></i></div>
+    <span class="counter" id="<%= it.name %>-counter"></span>
+  </div>
   <% } else { %>
-  <input id="<%= it.name %>" name="<%= it.name %>" type="<%= it.type || 'text' %>" value="<%= it.value %>" autocomplete="<%= it.autocomplete || 'off' %>" maxlength="<%= it.max || 254 %>" required<% if (error) { %> aria-invalid="true" aria-describedby="<%= it.name %>-error"<% } %>>
+  <input id="<%= it.name %>" name="<%= it.name %>" type="<%= it.type || 'text' %>" value="<%= it.value %>" placeholder="<%= it.placeholder || '' %>" autocomplete="<%= it.autocomplete || 'off' %>" maxlength="<%= it.max || 254 %>" required<% if (error) { %> aria-invalid="true" aria-describedby="<%= it.name %>-error"<% } %>>
   <% } %>
   <% if (error) { %><p class="error" id="<%= it.name %>-error"><%= error %></p><% } %>
 </div>

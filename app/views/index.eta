@@ -1,47 +1,64 @@
 <% layout('./layout', it) %>
+<%
+  const features = [
+    ['routes', 'Routes from files', 'Put a file in <code>server/routes</code> and it becomes a URL. <code>[slug].js</code> becomes <code>:slug</code>.'],
+    ['shield', 'Secure by default', 'Security headers, a CSP with a nonce per request, CSRF origin checks, rate limits and body limits.'],
+    ['check', 'Validation', 'Check params, query and body with zod. Mistakes turn into clean 422 responses.'],
+    ['alert', 'Clear errors', 'Throw <code>NotFoundError</code> anywhere. Visitors get an error page, API clients get JSON.'],
+    ['plug', 'Plugins', 'Add features with <code>white plugin add</code>. A local plugin is just a function.'],
+    ['sliders', 'Almost no config', 'Sensible defaults. <code>white.config.js</code> lists only what you change.'],
+  ];
+  const files = [['client/index.js', '/'], ['client/contact.js', '/contact'], ['client/blog/[slug].js', '/blog/:slug'], ['api/status.js', '/api/status']];
+%>
 <section class="hero">
-  <h1>A thin, fast framework<br>on top of Express</h1>
-  <p class="lead">File-based routes, secure defaults, validation and plugins. Plain JavaScript, no build step.</p>
-  <p class="actions">
-    <a class="button button--primary" href="/blog/getting-started">Get started</a>
-    <a class="button" href="/contact">Try the contact form</a>
+  <a class="badge" href="/blog/getting-started" data-rise>
+    <span class="badge__dot"></span>Plain JavaScript, no build step <span aria-hidden="true">→</span>
+  </a>
+  <h1 data-rise style="--i:1">A thin, fast framework on top of <span class="mark">Express</span></h1>
+  <p class="lead" data-rise style="--i:2">File-based routes, secure defaults, validation and plugins. Everything you need, nothing you have to configure first.</p>
+  <p class="actions" data-rise style="--i:3">
+    <%~ include('./partials/button', { href: '/blog/getting-started', label: 'Get started', arrow: true }) %>
+    <%~ include('./partials/button', { href: '/contact', label: 'Try the contact form', variant: 'ghost' }) %>
   </p>
-</section>
-
-<section>
-  <h2 class="section-title">What you get</h2>
-  <div class="grid">
-    <article class="card">
-      <h3>Routes from files</h3>
-      <p>Put a file in <code>server/routes</code> and it becomes a URL. <code>[slug].js</code> becomes <code>:slug</code>.</p>
-    </article>
-    <article class="card">
-      <h3>Secure by default</h3>
-      <p>Security headers, a CSP with a nonce per request, CSRF origin checks, rate limits and body limits.</p>
-    </article>
-    <article class="card">
-      <h3>Validation</h3>
-      <p>Check params, query and body with zod. Mistakes turn into clean 422 responses.</p>
-    </article>
-    <article class="card">
-      <h3>Clear errors</h3>
-      <p>Throw <code>NotFoundError</code> anywhere. Visitors get an error page, API clients get JSON.</p>
-    </article>
-    <article class="card">
-      <h3>Plugins</h3>
-      <p>Add features with <code>white plugin add</code>. A local plugin is just a function.</p>
-    </article>
-    <article class="card">
-      <h3>Almost no config</h3>
-      <p>Sensible defaults. <code>white.config.js</code> lists only what you change.</p>
-    </article>
+  <div data-rise style="--i:4" class="terminal-wrap">
+    <%~ include('./partials/terminal', {}) %>
   </div>
 </section>
 
 <section>
-  <h2 class="section-title">A route in four lines</h2>
-<pre><code>// server/routes/client/hello.js  →  GET /hello
-export default (router) =&gt; {
-  router.get('/', (req, res) =&gt; res.render('hello', { name: 'World' }));
-};</code></pre>
+  <div class="section-head" data-reveal>
+    <p class="eyebrow">What you get</p>
+    <h2>Small surface, solid defaults</h2>
+  </div>
+  <div class="grid">
+    <% features.forEach(([icon, title, text], i) => { %>
+    <article class="card" data-reveal style="--i:<%= i %>">
+      <span class="icon"><%~ include('./partials/icon', { name: icon }) %></span>
+      <h3><%= title %></h3>
+      <p><%~ text %></p>
+    </article>
+    <% }) %>
+  </div>
+</section>
+
+<section class="split">
+  <div data-reveal>
+    <p class="eyebrow">Routing</p>
+    <h2>A route in four lines</h2>
+    <p>Export one function. The file’s place in the folder tree is its URL, so there is no route table to keep in sync.</p>
+    <%~ include('./partials/code', { file: 'server/routes/client/hello.js', code: "export default (router) => {\n  router.get('/', (req, res) => {\n    res.render('hello', { name: 'World' });\n  });\n};" }) %>
+  </div>
+  <ul class="routemap" data-reveal style="--i:1" aria-label="Files and the URLs they become">
+    <% files.forEach(([file, url]) => { %>
+    <li><code><%= file %></code><span class="routemap__arrow" aria-hidden="true">→</span><code class="url"><%= url %></code></li>
+    <% }) %>
+  </ul>
+</section>
+
+<section>
+  <div class="cta" data-reveal>
+    <h2>Start in a minute</h2>
+    <p>Create a project from this example with one command, then open <code>app/views</code> and make it yours.</p>
+    <%~ include('./partials/code', { file: 'terminal', code: 'npx white-js install example:site' }) %>
+  </div>
 </section>
