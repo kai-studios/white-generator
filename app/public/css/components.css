@@ -1,6 +1,5 @@
-/* Reusable components. Each has a matching partial in app/views/partials. */
+/* Shared header, button, and footer styles. */
 
-/* ── Header and navigation ─────────────────────────────────────────────── */
 .site-header { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid transparent; background: rgb(255 255 255 / 0.72); -webkit-backdrop-filter: saturate(180%) blur(16px); backdrop-filter: saturate(180%) blur(16px); transition: border-color var(--t), box-shadow var(--t); }
 .site-header[data-scrolled] { border-color: var(--line); box-shadow: 0 8px 24px -16px rgb(16 24 40 / 0.12); }
 .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4rem; }
@@ -12,142 +11,22 @@
 .nav { position: relative; display: flex; gap: 0.125rem; padding: 0.25rem; border: 1px solid var(--line); border-radius: 999px; background: rgb(255 255 255 / 0.8); }
 .nav a { position: relative; z-index: 1; padding: 0.35rem 0.9rem; border-radius: 999px; color: var(--muted); font-size: 0.925rem; font-weight: 500; text-decoration: none; transition: color var(--t-fast); }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--fg); }
-/* The pill slides between links (positioned by ui.js; without JS the current link gets its own background) */
 .nav__pill { position: absolute; z-index: 0; top: 0.25rem; bottom: 0.25rem; left: 0; width: 0; border-radius: 999px; background: var(--soft-2); opacity: 0; transform: translateX(var(--x, 0)); }
 .nav__pill[data-ready] { width: var(--w, 0); opacity: 1; transition: transform var(--t) var(--ease), width var(--t) var(--ease), opacity var(--t-fast); }
 .nav:not(.has-pill) a[aria-current="page"] { background: var(--soft-2); }
 
-/* ── Button ────────────────────────────────────────────────────────────── */
-.button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; overflow: hidden; padding: 0.72rem 1.2rem; border: 1px solid var(--line-2); border-radius: 999px; background: var(--bg); color: var(--fg); font: inherit; font-size: 0.95rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; text-decoration: none; cursor: pointer; transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), background-color var(--t-fast), border-color var(--t-fast); }
-.button:hover { transform: translateY(-1px); box-shadow: var(--shadow-2); border-color: var(--faint); }
+.button { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; overflow: hidden; padding: 0.72rem 1.2rem; border: 1px solid var(--line-2); border-radius: 999px; background: var(--bg); color: var(--fg); font: inherit; font-size: 0.95rem; font-weight: 600; line-height: 1.2; text-decoration: none; cursor: pointer; transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), background-color var(--t-fast), border-color var(--t-fast); }
+.button:hover { transform: translateY(-1px); border-color: var(--faint); box-shadow: var(--shadow-2); }
 .button:active { transform: translateY(0) scale(0.98); box-shadow: none; transition-duration: 0.08s; }
 .button--primary { border-color: var(--ink); background: var(--ink); color: var(--ink-fg); }
 .button--primary:hover { border-color: var(--ink); background: #1b1b22; }
-.button--primary::after { content: ""; position: absolute; inset: 0; background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.28) 50%, transparent 70%); transform: translateX(-120%); pointer-events: none; }
-.button--primary:hover::after { transform: translateX(120%); transition: transform 0.9s var(--ease); }
-.button--sm { padding: 0.5rem 0.9rem; font-size: 0.875rem; }
 .button__arrow { transition: transform var(--t) var(--ease); }
 .button:hover .button__arrow { transform: translateX(3px); }
 
-/* Loading: the label fades, a spinner takes its place, the width does not change */
-.button__spinner { position: absolute; width: 1.1rem; height: 1.1rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; opacity: 0; transform: scale(0.6); transition: opacity var(--t-fast), transform var(--t) var(--ease); }
-.button[aria-busy="true"] { pointer-events: none; }
-.button[aria-busy="true"] .button__label, .button[aria-busy="true"] .button__arrow { opacity: 0; }
-.button[aria-busy="true"] .button__spinner { opacity: 1; transform: none; animation: spin 0.7s linear infinite; }
-@keyframes spin { to { rotate: 360deg; } }
-
-/* ── Badge ─────────────────────────────────────────────────────────────── */
-.badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.8rem 0.3rem 0.5rem; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); box-shadow: var(--shadow-1); color: var(--fg-2); font-size: 0.85rem; font-weight: 500; text-decoration: none; transition: box-shadow var(--t), border-color var(--t); }
-.badge:hover { border-color: var(--line-2); box-shadow: var(--shadow-2); }
-.badge__dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--gradient); box-shadow: 0 0 0 0 rgb(165 180 252 / 0.6); animation: pulse 2.4s var(--ease) infinite; }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgb(165 180 252 / 0.55); } 70%, 100% { box-shadow: 0 0 0 7px rgb(165 180 252 / 0); } }
-
-/* ── Card with a soft spotlight that follows the pointer ───────────────── */
-.card { position: relative; overflow: hidden; padding: 1.5rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--bg); box-shadow: var(--shadow-1); transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t); }
-.card::before { content: ""; position: absolute; inset: 0; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), rgb(165 180 252 / 0.16), transparent 70%); opacity: 0; transition: opacity var(--t); pointer-events: none; }
-.card:hover { transform: translateY(-3px); border-color: var(--line-2); box-shadow: var(--shadow-2); }
-.card:hover::before { opacity: 1; }
-.card > * { position: relative; }
-.card h3 { margin: 1rem 0 0.35rem; }
-.card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
-
-.icon { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 1px solid var(--line); border-radius: 12px; background: var(--soft); color: var(--fg); transition: background-color var(--t), color var(--t), transform var(--t) var(--ease-spring); }
-.icon svg { width: 1.2rem; height: 1.2rem; }
-.card:hover .icon { background: var(--ink); color: var(--ink-fg); border-color: var(--ink); transform: rotate(-6deg) scale(1.06); }
-
-/* ── Code block with copy button ───────────────────────────────────────── */
-.code { margin: 1.25rem 0; overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius); background: var(--soft); }
-.code__bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 2.5rem; padding: 0 0.5rem 0 1rem; border-bottom: 1px solid var(--line); background: var(--bg); }
-.code { position: relative; }
-.code--bare .code__bar { position: absolute; top: 0.45rem; right: 0.45rem; z-index: 1; min-height: 0; padding: 0; border: 0; background: transparent; }
-.code--bare pre { padding-right: 5rem; }
-.code__file { color: var(--muted); font: 0.8rem var(--mono); }
-.code__copy { display: none; align-items: center; gap: 0.4rem; padding: 0.25rem 0.6rem; border: 0; border-radius: 8px; background: transparent; color: var(--muted); font: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background-color var(--t-fast), color var(--t-fast); }
-.js .code__copy { display: inline-flex; }
-.code__copy:hover { background: var(--soft-2); color: var(--fg); }
-.code__copy[data-copied] { color: var(--ok); }
-.code pre { margin: 0; padding: 1rem 1.1rem; overflow-x: auto; font: 0.875rem/1.7 var(--mono); tab-size: 2; }
-
-/* ── Terminal: the same lines `white run dev` prints ───────────────────── */
-.terminal { overflow: hidden; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--bg); box-shadow: var(--shadow-3); text-align: left; }
-.terminal__bar { display: flex; align-items: center; gap: 0.4rem; padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); background: var(--soft); }
-.terminal__bar i { width: 0.65rem; height: 0.65rem; border-radius: 50%; background: var(--line-2); }
-.terminal__title { margin-left: 0.5rem; color: var(--faint); font: 0.78rem var(--mono); }
-.terminal__body { padding: 1.1rem 1.25rem 1.3rem; font: 0.85rem/1.85 var(--mono); }
-.terminal__line { display: block; white-space: pre; animation: type-in 0.5s var(--ease) both; animation-delay: calc(0.5s + var(--i, 0) * 0.11s); }
-@keyframes type-in { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: none; } }
-.terminal .prompt { color: var(--faint); }
-.terminal .method { display: inline-block; min-width: 4.2ch; font-weight: 600; }
-.terminal .get { color: #12805c; }
-.terminal .post { color: #b45309; }
-.terminal .dim { color: var(--faint); }
-.terminal .link { text-decoration: underline; text-decoration-color: var(--line-2); text-underline-offset: 0.25em; }
-.terminal__cursor { display: inline-block; width: 0.55ch; height: 1.1em; margin-left: 0.2ch; vertical-align: text-bottom; background: var(--fg); animation: blink 1.1s steps(1) infinite; }
-@keyframes blink { 50% { opacity: 0; } }
-
-/* ── Route map: file → URL ─────────────────────────────────────────────── */
-.routemap { display: grid; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
-.routemap li { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 0.75rem; padding: 0.7rem 0.9rem; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--bg); transition: border-color var(--t), transform var(--t) var(--ease), box-shadow var(--t); }
-.routemap li:hover { transform: translateX(4px); border-color: var(--line-2); box-shadow: var(--shadow-1); }
-.routemap code { padding: 0; border: 0; background: none; color: var(--muted); font-size: 0.8rem; overflow-wrap: anywhere; }
-.routemap .url { padding: 0.15rem 0.55rem; border-radius: 999px; background: var(--soft-2); color: var(--fg); font-weight: 600; }
-.routemap__arrow { color: var(--faint); transition: transform var(--t) var(--ease), color var(--t); }
-.routemap li:hover .routemap__arrow { transform: translateX(3px); color: var(--fg); }
-
-/* ── Form field ────────────────────────────────────────────────────────── */
-.field { display: flex; flex-direction: column; gap: 0.45rem; }
-.field label { font-size: 0.9rem; font-weight: 600; }
-.field input, .field textarea { width: 100%; padding: 0.75rem 0.95rem; border: 1px solid var(--line-2); border-radius: var(--radius-sm); background: var(--bg); color: inherit; font: inherit; transition: border-color var(--t-fast), box-shadow var(--t) var(--ease); }
-.field textarea { min-height: 9rem; resize: vertical; }
-.field input::placeholder, .field textarea::placeholder { color: var(--faint); }
-.field input:hover, .field textarea:hover { border-color: var(--faint); }
-.field input:focus, .field textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 4px rgb(165 180 252 / 0.3); }
-.has-error input, .has-error textarea { border-color: var(--danger); animation: shake 0.45s var(--ease); }
-.has-error input:focus, .has-error textarea:focus { box-shadow: 0 0 0 4px rgb(217 45 32 / 0.12); }
-.error { margin: 0; color: var(--danger); font-size: 0.875rem; animation: rise 0.35s var(--ease) both; }
-@keyframes shake { 20% { transform: translateX(-5px); } 40% { transform: translateX(4px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
-
-.field__foot { display: flex; align-items: center; gap: 0.75rem; }
-.meter { flex: 1; height: 3px; overflow: hidden; border-radius: 999px; background: var(--soft-2); }
-.meter i { display: block; width: 100%; height: 100%; border-radius: inherit; background: var(--gradient); transform: scaleX(var(--p, 0)); transform-origin: left; transition: transform var(--t) var(--ease), filter var(--t); }
-.meter[data-near] i { filter: hue-rotate(40deg) saturate(1.6); }
-.counter { min-width: 6ch; color: var(--muted); font-size: 0.8rem; font-variant-numeric: tabular-nums; text-align: right; }
-
-/* ── Notice, success, toast ────────────────────────────────────────────── */
-.notice { display: flex; align-items: center; gap: 0.75rem; margin-block: 1.5rem; padding: 0.9rem 1.1rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--soft); animation: rise 0.6s var(--ease) both; }
-
-.check { flex: none; width: 1.75rem; height: 1.75rem; }
-.check circle { fill: none; stroke: var(--ok); stroke-width: 2; stroke-dasharray: 76; stroke-dashoffset: 76; animation: draw 0.7s var(--ease) 0.1s forwards; }
-.check path { fill: none; stroke: var(--ok); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 20; stroke-dashoffset: 20; animation: draw 0.45s var(--ease) 0.55s forwards; }
-@keyframes draw { to { stroke-dashoffset: 0; } }
-
-.success { display: grid; justify-items: center; gap: 0.5rem; padding-block: 3rem; text-align: center; animation: rise 0.6s var(--ease) both; }
-.success .check { width: 3.5rem; height: 3.5rem; margin-bottom: 0.5rem; }
-.success h2 { font-size: 1.5rem; }
-.success p { margin: 0 0 1rem; color: var(--muted); }
-
-.toasts { position: fixed; z-index: 100; left: 50%; bottom: 1.5rem; display: grid; gap: 0.5rem; justify-items: center; transform: translateX(-50%); pointer-events: none; }
-.toast { display: flex; align-items: center; gap: 0.6rem; padding: 0.7rem 1.1rem; border: 1px solid var(--line); border-radius: 999px; background: rgb(255 255 255 / 0.92); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: var(--shadow-3); font-size: 0.9rem; font-weight: 500; animation: toast-in 0.5s var(--ease-spring) both; }
-.toast[data-leaving] { animation: toast-out 0.3s var(--ease) both; }
-.toast::before { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--ok); }
-.toast--error::before { background: var(--danger); }
-@keyframes toast-in { from { opacity: 0; transform: translateY(16px) scale(0.94); } }
-@keyframes toast-out { to { opacity: 0; transform: translateY(8px) scale(0.96); } }
-
-/* ── Thin reading progress line (browsers with scroll-driven animations) ─ */
-.progress { position: fixed; z-index: 60; top: 0; left: 0; right: 0; height: 2px; background: var(--gradient); transform: scaleX(0); transform-origin: left; display: none; }
-@supports (animation-timeline: scroll()) {
-  .progress { display: block; animation: grow linear both; animation-timeline: scroll(root); }
-  @keyframes grow { to { transform: scaleX(1); } }
-}
-
-/* ── Footer ────────────────────────────────────────────────────────────── */
 .site-footer { border-top: 1px solid var(--line); color: var(--muted); font-size: 0.875rem; }
 .site-footer__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1.5rem; padding-block: 1.75rem; }
 .site-footer a { text-decoration-color: var(--line-2); }
 
 @media (max-width: 34rem) {
   .nav a { padding-inline: 0.7rem; }
-  .routemap li { grid-template-columns: 1fr auto; }
-  .routemap__arrow { display: none; }
 }

@@ -1,15 +1,17 @@
 <!doctype html>
+<%
+  const siteName = 'My site';
+  const tagline = 'A clean starting point for your website.';
+%>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#ffffff">
-  <title><%= it.title ? it.title + ' · ' + it.site.name : it.site.name + ' · ' + it.site.tagline %></title>
-  <meta name="description" content="<%= it.description || it.site.tagline %>">
+  <title><%= it.title ? it.title + ' · ' + siteName : siteName + ' · ' + tagline %></title>
+  <meta name="description" content="<%= it.description || tagline %>">
   <link rel="icon" href="<%= it.w.asset('/favicon.svg') %>" type="image/svg+xml">
-  <%/* Tells the CSS that scripts run, so reveal animations may hide things until they are scrolled to */%>
-  <script nonce="<%= it.nonce %>">document.documentElement.classList.add('js')</script>
   <link rel="stylesheet" href="<%= it.w.asset('/css/base.css') %>">
   <link rel="stylesheet" href="<%= it.w.asset('/css/components.css') %>">
   <link rel="stylesheet" href="<%= it.w.asset('/css/pages.css') %>">
@@ -22,6 +24,5 @@
     <%~ it.body %>
   </main>
   <%~ include('./partials/footer', it) %>
-  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
 </body>
 </html>
